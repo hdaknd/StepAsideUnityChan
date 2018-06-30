@@ -68,14 +68,14 @@ public class UnityChanController : MonoBehaviour {
                 //Unityちゃんに前方向の力を加える（追加）
                 this.myRigidbody.AddForce (this.transform.forward * this.forwardForce);
 
-                //Unityちゃんを矢印キーまたはボタンに応じて左右に移動させる（追加）
-                if (Input.GetKey (KeyCode.LeftArrow)  && -this.movableRange < this.transform.position.x) {
-                        //左に移動（追加）
+                  //Unityちゃんを矢印キーまたはボタンに応じて左右に移動させる（追加）
+                if ((Input.GetKey (KeyCode.LeftArrow) || this.isLButtonDown) && -this.movableRange < this.transform.position.x) {
+                        //左に移動
                         this.myRigidbody.AddForce (-this.turnForce, 0, 0);
-                } else if (Input.GetKey (KeyCode.RightArrow)  && this.transform.position.x < this.movableRange) {
-                        //右に移動（追加）
-                       this.myRigidbody.AddForce (this.turnForce, 0, 0);
-                }
+                } else if ((Input.GetKey (KeyCode.RightArrow) || this.isRButtonDown) && this.transform.position.x < this.movableRange) {
+                        //右に移動
+                        this.myRigidbody.AddForce (this.turnForce, 0, 0);
+                } 
  
                 //Jumpステートの場合はJumpにfalseをセットする（追加）
                 if (this.myAnimator.GetCurrentAnimatorStateInfo(0).IsName ("Jump")) {
